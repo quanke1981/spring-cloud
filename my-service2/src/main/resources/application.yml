@@ -1,0 +1,18 @@
+server:
+    port: 3001
+    
+spring:
+    application:
+        name: a-bootiful-client
+
+eureka:
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        serviceUrl:
+          defaultZone: http://localhost:8762/eureka
+
+logging:
+  level:
+    com:
+      netflix: DEBUG
