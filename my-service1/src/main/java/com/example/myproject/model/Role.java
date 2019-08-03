@@ -1,5 +1,7 @@
 package com.example.myproject.model;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,7 +10,7 @@ public class Role extends BaseEntity {
 
     @Column(name = "role_name")
     private String roleName;
-
+    
     public Role() {
     }
 
@@ -18,10 +20,10 @@ public class Role extends BaseEntity {
     }
 
     public String getRoleName() {
-        return roleName;
+        return roleName.toUpperCase();
     }
 
     public void setRoleName(String roleName) {
-        this.roleName = roleName;
+        this.roleName = roleName.toUpperCase();
     }
 }

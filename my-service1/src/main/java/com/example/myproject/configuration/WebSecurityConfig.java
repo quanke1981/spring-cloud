@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 
@@ -24,22 +26,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
     private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
 	
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    @Autowired
+    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(getPasswordEncoder());
     }	
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	http.csrf().disable();
+//    	http.csrf().disable();
+    	
         http
         	.authorizeRequests()
     		.antMatchers("/hello").permitAll()
             .anyRequest().authenticated()
             .and()
-            .formLogin().permitAll();
-//            .httpBasic().authenticationEntryPoint(authenticationEntryPoint);
+//            .formLogin().permitAll();
+            .httpBasic().authenticationEntryPoint(authenticationEntryPoint)
+            .and()
+            .formLogin().disable()
+            .csrf().disable()
+            .sessionManagement().disable()
+            .cors();
+        
     }
 
     private PasswordEncoder getPasswordEncoder() {
@@ -56,15 +65,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         };
     }
     
+   
+    
 //    @Override
 //    public void configure(WebSecurity web) throws Exception {
 //        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
 //    }
     
     
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 	
 }
