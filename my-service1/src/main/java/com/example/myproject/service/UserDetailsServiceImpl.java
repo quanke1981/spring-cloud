@@ -22,14 +22,14 @@ public class UserDetailsServiceImpl extends BaseService<User> implements UserDet
     @Autowired
     private UserRepository userRepository;
     
-    @Autowired
-    private RoleRepository roleRepository;
+    
     
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByFirstName(userName);
         return Optional.ofNullable(user).orElseThrow(()->new UsernameNotFoundException("Username Not Found"))
                .map(UserDetailsImpl::new).get();
+        
     }
 }
 

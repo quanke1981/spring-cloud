@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 
 public class UserDetailsImpl extends User implements UserDetails {
 
-    public UserDetailsImpl(User user) {
+	private static final long serialVersionUID = 6651327604059848838L;
+
+	public UserDetailsImpl(User user) {
         super(user);
     }
 

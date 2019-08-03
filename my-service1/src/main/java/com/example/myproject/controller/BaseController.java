@@ -11,7 +11,7 @@ import com.example.myproject.service.BaseService;
 public abstract class BaseController<T extends BaseEntity, V extends BaseService> {
     
     @Autowired
-    private V service;
+    protected V service;
     
     @SuppressWarnings("unchecked")
 	@RequestMapping(method=RequestMethod.GET)
@@ -43,4 +43,6 @@ public abstract class BaseController<T extends BaseEntity, V extends BaseService
             return false;
         }
     }
+    
+    
 }
