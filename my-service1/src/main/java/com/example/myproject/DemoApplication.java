@@ -2,7 +2,7 @@ package com.example.myproject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+//import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.cloud.client.discovery.DiscoveryClient;
 //
@@ -11,9 +11,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 //import org.springframework.web.bind.annotation.RestController;
 //import org.springframework.cloud.client.ServiceInstance;
 
-import java.util.List;
+//import java.util.List;
 
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @SpringBootApplication
 public class DemoApplication {
 
@@ -22,6 +22,8 @@ public class DemoApplication {
 	}
 }
 
+
+//客户端拉取eurake注册实例
 //@RestController
 //class ServiceInstanceRestController {
 //
