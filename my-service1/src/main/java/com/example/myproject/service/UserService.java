@@ -20,7 +20,7 @@ public class UserService extends BaseService<User> implements UserDetailsService
     
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByFirstName(userName);
+        Optional<User> user = userRepository.findByUserName(userName);
         return Optional.ofNullable(user).orElseThrow(()->new UsernameNotFoundException("Username Not Found"))
                .map(UserDetailsImpl::new).get();
         

@@ -8,10 +8,10 @@ import javax.persistence.*;
 @Table(name="author")
 public class Author extends BaseEntity {
 	
-	@Column(name="last_name")
+	@Column(name="last_name", nullable = false, length=50)
 	private String lastName;
 	
-	@Column(name="first_name")
+	@Column(name="first_name", nullable = false, length=50)
 	private String firstName;
 	
 	

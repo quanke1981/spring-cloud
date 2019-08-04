@@ -5,16 +5,23 @@ spring:
   application:
     name: a-bootiful-client
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/demo
     username: root
     password: Scott@1234
+    initialization-mode: ALWAYS
+    schema: classpath:schema.sql
+    data: classpath:data.sql
   main:
     allow-bean-definition-overriding: true
   jpa:
+    generate-ddl: false
     show-sql: true
     hibernate:
       dialect: org.hibernate.dialect.MySQL5Dialect
+      ddl-auto: none
+    open-in-view: false
+    
       
 # eureka:
 #   client:

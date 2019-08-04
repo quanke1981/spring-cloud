@@ -16,7 +16,7 @@ public class Book extends BaseEntity {
         this.name = book.getName();
     }
 
-	@Column(name="book_name")
+	@Column(name="book_name", nullable = false)
 	private String name;
 	
 	@ManyToMany(cascade = CascadeType.ALL)

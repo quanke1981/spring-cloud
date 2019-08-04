@@ -7,13 +7,13 @@ import java.util.Set;
 @Table(name="user")
 public class User extends BaseEntity {
 
-    @Column(name="username")
+    @Column(name="username", nullable = false, length = 30)
     private String userName;
 
-    @Column(name="password")
+    @Column(name="password", nullable = false, length = 10)
     private String password;
     
-    @Column(name="active")
+    @Column(name="active", nullable = false)
     private boolean isActive;
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
