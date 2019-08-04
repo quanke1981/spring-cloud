@@ -1,13 +1,7 @@
 package com.example.myproject.model;
 
-import java.util.Optional;
 import java.util.Set;
-
 import javax.persistence.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.example.myproject.repository.RoleRepository;
 
 @Entity
 @Table(name="role")

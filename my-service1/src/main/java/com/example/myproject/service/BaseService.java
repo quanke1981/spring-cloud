@@ -38,6 +38,7 @@ public abstract class BaseService<T extends BaseEntity> {
     }
     
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteById(int id) {
         repository.deleteById(id);
     }

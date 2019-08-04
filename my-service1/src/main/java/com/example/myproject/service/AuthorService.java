@@ -5,5 +5,8 @@ import com.example.myproject.model.Author;
 
 @Service
 public class AuthorService extends BaseService<Author> {
-
+	
+//	public Author save(Author entity) {
+//        return repository.save(entity);
+//    }
 }
