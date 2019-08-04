@@ -5,13 +5,10 @@ import java.util.Set;
 
 @Entity
 @Table(name="user")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
-    @Column(name="firstname")
-        private String firstName;
-
-    @Column(name="lastname")
-    private String lastName;
+    @Column(name="username")
+    private String userName;
 
     @Column(name="password")
     private String password;
@@ -28,27 +25,18 @@ public class User extends BaseEntity{
 
     public User(User user) {
         this.id = user.getId();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
+        this.userName = user.getUserName();
         this.password = user.getPassword();
         this.isActive = user.getIsActive();
         this.roles = user.getRoles();
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -79,8 +67,7 @@ public class User extends BaseEntity{
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", isActive=" + isActive +
                 ", roles=" + roles +
