@@ -1,13 +1,13 @@
 package com.example.myproject.model;
 
+import javax.persistence.*;
 import java.util.Set;
 
-import javax.persistence.*;
 
 @Entity
 @Table(name="book")
 public class Book extends BaseEntity {
-	
+
 	public Book() {
     }
 	
@@ -16,23 +16,21 @@ public class Book extends BaseEntity {
         this.name = book.getName();
     }
 
-	@Column(name="book_name", nullable = false)
+	@Column(name="book_name")
 	private String name;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "book_author", joinColumns = {
-            @JoinColumn(name = "book_id", referencedColumnName = "id")}, inverseJoinColumns = {
-            @JoinColumn(name = "author_id", referencedColumnName = "id")})
-	private Set<Author> authors;
+//	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+//	@JoinTable(name="user_role",joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
+//	private Set<Author> authors;
 	
 
-	public Set<Author> getAuthors() {
-		return authors;
-	}
-
-	public void setAuthors(Set<Author> authors) {
-		this.authors = authors;
-	}
+//	public Set<Author> getAuthors() {
+//		return authors;
+//	}
+//
+//	public void setAuthors(Set<Author> authors) {
+//		this.authors = authors;
+//	}
 
 	public String getName() {
 		return name;

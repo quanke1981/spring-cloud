@@ -4,14 +4,16 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="author")
 public class Author extends BaseEntity {
 	
-	@Column(name="last_name", nullable = false, length=50)
+	@Column(name="last_name")
 	private String lastName;
 	
-	@Column(name="first_name", nullable = false, length=50)
+	@Column(name="first_name")
 	private String firstName;
 	
 	
@@ -24,8 +26,9 @@ public class Author extends BaseEntity {
         this.lastName = author.getLastName();
     }
 	
-	@ManyToMany(mappedBy="authors")
-	private Set<Book> books;
+//	@JsonIgnore
+//	@ManyToMany(mappedBy="authors")
+//	private Set<Book> books;
 
 	public String getLastName() {
 		return lastName;

@@ -17,7 +17,8 @@ public abstract class BaseController<T extends BaseEntity, V extends BaseService
 	@RequestMapping(method=RequestMethod.GET)
     @ResponseBody
     public List<T> get() {
-        return service.getAll();
+    	List<T> results = service.getAll();
+        return results;
     }
     
     @SuppressWarnings("unchecked")

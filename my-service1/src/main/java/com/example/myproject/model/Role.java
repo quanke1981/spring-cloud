@@ -3,17 +3,27 @@ package com.example.myproject.model;
 import java.util.Set;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="role")
 public class Role extends BaseEntity {
 
 	
-    @Column(name = "role_name", nullable = false, length=20)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5127197825409192158L;
+	
+	
+	@Column(name = "role_name", nullable = false, length=20)
     private String roleName;
     
     public Role() {
     }
 
+ 
+    @JsonIgnore
     @ManyToMany(fetch=FetchType.LAZY, mappedBy="roles")
     private Set<User> users;
     
