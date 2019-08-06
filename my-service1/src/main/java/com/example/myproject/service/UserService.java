@@ -23,14 +23,17 @@ import com.example.myproject.repository.UserRepository;
 public class UserService extends BaseService<User> implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
+    
+    protected JpaRepository<User, Integer> getRepository() {
+		return this.repository;
+	}
     
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUserName(userName);
+        Optional<User> user = repository.findByUserName(userName);
         return Optional.ofNullable(user).orElseThrow(()->new UsernameNotFoundException("Username Not Found"))
                .map(UserDetailsImpl::new).get();
-        
     }
 }
 
