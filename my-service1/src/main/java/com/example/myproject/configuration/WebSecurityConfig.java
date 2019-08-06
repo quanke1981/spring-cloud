@@ -12,54 +12,44 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
-    private UserDetailsService userDetailsService;
-	
+	private UserDetailsService userDetailsService;
+
 	@Autowired
-    private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
-	
-    @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(getPasswordEncoder());
-    }	
+	private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-        	.authorizeRequests()
-    		.antMatchers("/hello").permitAll()
-            .anyRequest().authenticated()
-            .and()
-            .httpBasic().authenticationEntryPoint(authenticationEntryPoint)
-            .and()
-            .formLogin().disable()
-            .csrf().disable()
-            .sessionManagement().disable()
-            .cors();
-    }
+	@Autowired
+	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(getPasswordEncoder());
+	}
 
-    private PasswordEncoder getPasswordEncoder() {
-        return new PasswordEncoder() {
-            @Override
-            public String encode(CharSequence charSequence) {
-                return charSequence.toString();
-            }
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/hello").permitAll().anyRequest().authenticated().and().httpBasic()
+				.authenticationEntryPoint(authenticationEntryPoint).and().formLogin().disable().csrf().disable()
+				.sessionManagement().disable().cors();
+	}
 
-            @Override
-            public boolean matches(CharSequence charSequence, String s) {
-                return true;
-            }
-        };
-    }
-    
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	private PasswordEncoder getPasswordEncoder() {
+		return new PasswordEncoder() {
+			@Override
+			public String encode(CharSequence charSequence) {
+				return charSequence.toString();
+			}
+
+			@Override
+			public boolean matches(CharSequence charSequence, String s) {
+				return true;
+			}
+		};
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }

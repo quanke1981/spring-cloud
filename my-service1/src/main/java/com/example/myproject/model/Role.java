@@ -1,5 +1,6 @@
 package com.example.myproject.model;
 
+import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -7,7 +8,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="role")
-public class Role extends BaseEntity {
+public class Role extends BaseEntity implements Serializable {
+	
+	private static final long serialVersionUID = 7669272186961288831L;
 	
 	@Column(name = "role_name", nullable = false, length=20)
     private String roleName;

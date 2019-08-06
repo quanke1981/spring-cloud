@@ -2,14 +2,14 @@ package com.example.myproject.model;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name="book")
-public class Book extends BaseEntity {
+public class Book extends BaseEntity implements Serializable {
+
+	private static final long serialVersionUID = -6460903024062661162L;
 
 	public Book() {
     }
