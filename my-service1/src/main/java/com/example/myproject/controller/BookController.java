@@ -24,13 +24,6 @@ import com.example.myproject.service.BookService;
 @RequestMapping("api/books")
 public class BookController extends BaseController<Book, BookService> {
 	
-//	@RequestMapping(method=RequestMethod.GET)
-//    @ResponseBody
-//    public List<Book> get() {
-//    	List<Book> results = service.getAll();
-//        return results;
-//    }
-	
     @RequestMapping(value="/{id}", method=RequestMethod.POST)
     @ResponseBody
     public Book updateBookName(@PathVariable int id, @RequestBody Book entity) {

@@ -27,20 +27,20 @@ public abstract class BaseController<T extends BaseEntity, V extends BaseService
     
     @SuppressWarnings("unchecked")
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public ResponseEntity<T> getUserById(@PathVariable int id) {
+    public T getUserById(@PathVariable int id) {
     	Optional<T> entity = service.findOne(id);
     	
     	if(entity.isPresent()) {
-    		return ResponseEntity.ok(entity.get());
+    		return entity.get();
     	}
-    	return ResponseEntity.ok(null);
+    	return null;
     }
     
     @SuppressWarnings("unchecked")
     @RequestMapping(method=RequestMethod.POST)
     @ResponseBody
-    public T post(@RequestBody T entity) {
-        return (T)service.save(entity);
+    public ResponseEntity<T> post(@RequestBody T entity) {
+        return ResponseEntity.ok((T)service.save(entity));
     }
     
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
