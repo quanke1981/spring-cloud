@@ -8,13 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="role")
 public class Role extends BaseEntity {
-
-	
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5127197825409192158L;
-	
 	
 	@Column(name = "role_name", nullable = false, length=20)
     private String roleName;

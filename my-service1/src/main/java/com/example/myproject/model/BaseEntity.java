@@ -1,7 +1,5 @@
 package com.example.myproject.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,10 +8,7 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass 
 public abstract class BaseEntity {
-	
-	
-	
-	@Id
+    @Id
     @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     protected int id;

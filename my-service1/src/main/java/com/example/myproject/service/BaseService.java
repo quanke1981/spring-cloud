@@ -1,6 +1,10 @@
 package com.example.myproject.service;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,10 +17,15 @@ public abstract class BaseService<T extends BaseEntity> {
     @Autowired
     protected JpaRepository<T, Integer> repository;
     
+    
     public List<T> getAll() {
-    	List<T> results = repository.findAll();
-        return results;
+        return repository.findAll();
     }
+    
+    public Optional<T> findOne(int id) {
+    	return repository.findById(id);
+    }
+    
     
     public T getOne(int id) {
         return repository.getOne(id);

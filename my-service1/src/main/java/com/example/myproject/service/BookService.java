@@ -4,61 +4,39 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.example.myproject.model.Author;
 import com.example.myproject.model.Book;
+import com.example.myproject.model.User;
+import com.example.myproject.repository.BookRepository;
 
 @Service
-public class BookService extends BaseService<Book>{
+public class BookService extends BaseService<Book> {
 	
-	public Book save(Book entity) {
-        return repository.save(entity);
-    }
+	@Autowired
+    protected BookRepository repository;
 	
 	public Book updateAuhorList(int id, Set<Author> authors) {
-		Book book = repository.getOne(id);
+		Optional<Book> opBook = repository.findById(id);
 		
-//		if(book!=null) {
-//			Iterator<Author> iterator = book.getAuthors().iterator();
-//			if(book.getAuthors()!=null) {
-//				while(iterator.hasNext()) {
-//					Author curAuthor = iterator.next();
-//					boolean isDelete = true;
-//					for(Author author: authors) {
-//						//update existing author
-//						if(author.getId()>0 ) {
-//							if(curAuthor.getId() == author.getId()) {
-//								curAuthor.setFirstName(author.getFirstName());
-//								curAuthor.setLastName(author.getLastName());
-//								isDelete = false;
-//								break;
-//							}
-//						}
-//					}
-//					
-//					if (isDelete) {
-//						iterator.remove();
-//					}
-//				}
-//				
-//				authors.stream().filter(author -> author.getId()<=0).forEach(author-> {
-//					book.getAuthors().add(author);
-//				});
-//			}
-//			else {
-//				book.setAuthors(authors);
-//			}
-//			
-//			return repository.save(book);
-//		}
+		if(opBook.isPresent()) {
+			Book book = opBook.get();
+			Set<Author> extAuhtors = book.getAuthors();
+			extAuhtors.clear();
+			extAuhtors.addAll(authors);
+			return repository.save(book);
+		}
 		
 		return null;
 	}
-	
-	
-	
 }

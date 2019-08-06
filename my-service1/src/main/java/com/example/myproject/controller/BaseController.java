@@ -1,10 +1,14 @@
 package com.example.myproject.controller;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.myproject.model.BaseEntity;
+import com.example.myproject.model.Book;
 import com.example.myproject.service.BaseService;
 
 @SuppressWarnings("rawtypes")
@@ -17,14 +21,19 @@ public abstract class BaseController<T extends BaseEntity, V extends BaseService
 	@RequestMapping(method=RequestMethod.GET)
     @ResponseBody
     public List<T> get() {
-    	List<T> results = service.getAll();
-        return results;
+        return service.getAll();
     }
+    
     
     @SuppressWarnings("unchecked")
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public T getUserById(@PathVariable int id) {
-        return (T)service.getOne(id);
+    public ResponseEntity<T> getUserById(@PathVariable int id) {
+    	Optional<T> entity = service.findOne(id);
+    	
+    	if(entity.isPresent()) {
+    		return ResponseEntity.ok(entity.get());
+    	}
+    	return ResponseEntity.ok(null);
     }
     
     @SuppressWarnings("unchecked")

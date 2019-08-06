@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="author")
-public class Author extends BaseEntity {
+public class Author extends BaseEntity{
 	
 	@Column(name="last_name")
 	private String lastName;
@@ -26,9 +26,9 @@ public class Author extends BaseEntity {
         this.lastName = author.getLastName();
     }
 	
-//	@JsonIgnore
-//	@ManyToMany(mappedBy="authors")
-//	private Set<Book> books;
+	@JsonIgnore
+	@ManyToMany(mappedBy="authors")
+	private Set<Book> books;
 
 	public String getLastName() {
 		return lastName;
@@ -45,8 +45,4 @@ public class Author extends BaseEntity {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
-	
-	
-	
 }

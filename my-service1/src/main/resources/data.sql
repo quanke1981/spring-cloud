@@ -24,9 +24,3 @@ SELECT @user_id_qk, @role_user_id WHERE NOT EXISTS(SELECT 1 FROM user_role WHERE
 
 INSERT INTO user_role (user_id, role_id)
 SELECT @user_id_qx, @role_user_id WHERE NOT EXISTS(SELECT 1 FROM user_role WHERE user_id=@user_id_qx AND role_id=@role_user_id);
-
--- IF NOT EXISTS(SELECT 1 FROM user_role) THEN
---     INSERT INTO user_role (user_id, role_id) VALUES (1,1);
---     INSERT INTO user_role (user_id, role_id) VALUES (1,2);
---     INSERT INTO user_role (user_id, role_id) VALUES (2,2);
--- END IF
