@@ -1,14 +1,19 @@
 package com.example.myproject.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.example.myproject.model.Author;
 import com.example.myproject.model.Book;
+import com.example.myproject.model.User;
 import com.example.myproject.repository.BookRepository;
 
+@Transactional
 @Service
 public class BookService extends BaseService<Book> {
 
@@ -32,4 +37,15 @@ public class BookService extends BaseService<Book> {
 
 		return null;
 	}
+	
+	
+	@Override
+	public List<Book> getAll() {
+		List<Book> books = getRepository().findAll();
+		books.forEach(book -> {
+			book.getAuthors().size();
+		});
+		return books;
+	}
+	
 }

@@ -29,7 +29,7 @@ public class Author extends BaseEntity implements Serializable {
 	}
 
 	@JsonIgnore
-	@ManyToMany(mappedBy = "authors")
+	@ManyToMany(mappedBy = "authors", fetch=FetchType.LAZY)
 	private Set<Book> books;
 
 	public String getLastName() {

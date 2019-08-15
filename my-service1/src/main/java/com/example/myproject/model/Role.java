@@ -17,7 +17,6 @@ public class Role extends BaseEntity implements Serializable {
     
     public Role() {
     }
-
  
     @JsonIgnore
     @ManyToMany(fetch=FetchType.LAZY, mappedBy="roles")

@@ -1,7 +1,6 @@
 package com.example.myproject.model;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.Set;
 
@@ -22,7 +21,7 @@ public class Book extends BaseEntity implements Serializable {
 	@Column(name="book_name")
 	private String name;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinTable(name="book_author",joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
 	private Set<Author> authors;
 	
