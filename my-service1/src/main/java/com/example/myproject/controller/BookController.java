@@ -1,8 +1,12 @@
 package com.example.myproject.controller;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import org.springframework.security.access.prepost.PreAuthorize;
+
+import com.example.myproject.common.FilterCriteria;
+//import com.example.myproject.model.search.Query;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,11 +34,20 @@ public class BookController extends BaseController<Book, BookService> {
 		return null;
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+//	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/{id}/updateAuthorList", method = RequestMethod.POST)
 	@ResponseBody
 	public Book updateAuthorList(@PathVariable int id, @RequestBody Set<Author> authors) {
 		return service.updateAuhorList(id, authors);
 	}
 
+
+	@RequestMapping(value = "/query", method = RequestMethod.POST)
+	@ResponseBody
+//	public List<Book> getBooksByQuery (@RequestBody Query query) {
+//		return service.getBookByQuery(query);
+//	}
+	public List<Book> getBooksByQuery (@RequestBody List<FilterCriteria> criteria) {
+		return service.getBookByQuery(criteria);
+	}
 }

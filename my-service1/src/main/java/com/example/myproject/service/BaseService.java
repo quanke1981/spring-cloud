@@ -3,7 +3,7 @@ package com.example.myproject.service;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import com.example.myproject.model.BaseEntity;
 
 public abstract class BaseService<T extends BaseEntity> {
@@ -30,12 +30,12 @@ public abstract class BaseService<T extends BaseEntity> {
 		return getRepository().save(entity);
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+//	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void delete(T entity) {
 		getRepository().delete(entity);
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+//	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void deleteById(int id) {
 		getRepository().deleteById(id);
 	}
